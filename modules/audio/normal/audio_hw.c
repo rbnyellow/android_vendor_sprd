@@ -811,14 +811,14 @@ typedef struct {
 }dev_names_para_t;
 
 static const dev_names_para_t dev_names_linein[] = {
-    { AUDIO_DEVICE_OUT_SPEAKER | AUDIO_DEVICE_OUT_FM_SPEAKER, "speaker" },
-    { AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE |AUDIO_DEVICE_OUT_FM_HEADSET,
+    { AUDIO_DEVICE_OUT_SPEAKER | AUDIO_DEVICE_OUT_SPEAKER, "speaker" },
+    { AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE |AUDIO_DEVICE_OUT_USB_HEADSET,
         "headphone" },
     { AUDIO_DEVICE_OUT_EARPIECE, "earpiece" },
     /* ANLG for voice call via linein*/
-    { AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET | AUDIO_DEVICE_OUT_ALL_FM, "line" },
-    { AUDIO_DEVICE_OUT_FM_HEADSET, "line-headphone" },
-    { AUDIO_DEVICE_OUT_FM_SPEAKER, "line-speaker" },
+    { AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET | AUDIO_DEVICE_OUT_ALL_USB, "line" },
+    { AUDIO_DEVICE_OUT_USB_HEADSET, "line-headphone" },
+    { AUDIO_DEVICE_OUT_SPEAKER, "line-speaker" },
 
     { AUDIO_DEVICE_IN_COMMUNICATION, "comms" },
     { AUDIO_DEVICE_IN_AMBIENT, "ambient" },
@@ -830,8 +830,8 @@ static const dev_names_para_t dev_names_linein[] = {
     //{ "linein-capture"},
 };
 static const dev_names_para_t dev_names_digitalfm[] = {
-    { AUDIO_DEVICE_OUT_SPEAKER | AUDIO_DEVICE_OUT_FM_SPEAKER, "speaker" },
-    { AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE |AUDIO_DEVICE_OUT_FM_HEADSET,
+    { AUDIO_DEVICE_OUT_SPEAKER | AUDIO_DEVICE_OUT_SPEAKER, "speaker" },
+    { AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE |AUDIO_DEVICE_OUT_USB_HEADSET,
         "headphone" },
     { AUDIO_DEVICE_OUT_EARPIECE, "earpiece" },
     /* ANLG for voice call via linein*/
@@ -5676,13 +5676,13 @@ static void adev_config_start(void *data, const XML_Char *elem,
 
     if (property_get(FM_DIGITAL_SUPPORT_PROPERTY, value, "0") && strcmp(value, "1") == 0)
     {
-        dev_names = dev_names_digitalfm;
-        dev_num = sizeof(dev_names_digitalfm) / sizeof(dev_names_digitalfm[0]);
+        dev_names = &dev_names_digitalfm;
+        dev_num = sizeof(&dev_names_digitalfm) / sizeof(dev_names_digitalfm[0]);
     }
     else
     {
-        dev_names = dev_names_linein;
-        dev_num = sizeof(dev_names_linein) / sizeof(dev_names_linein[0]);
+        dev_names = &dev_names_linein;
+        dev_num = sizeof(&dev_names_linein) / sizeof(dev_names_linein[0]);
     }
 
     /* default if not set it 0 */

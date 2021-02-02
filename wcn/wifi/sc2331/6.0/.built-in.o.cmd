@@ -1,0 +1,1 @@
+cmd_/media/pc2robin/WD_Linux/lineage-15.1/working_dir/vendor/sprd/wcn/wifi/sc2331/6.0/built-in.o :=  rm -f /media/pc2robin/WD_Linux/lineage-15.1/working_dir/vendor/sprd/wcn/wifi/sc2331/6.0/built-in.o; CROSS_COMPILE= arm-linux-androidkernel-ar rcsD /media/pc2robin/WD_Linux/lineage-15.1/working_dir/vendor/sprd/wcn/wifi/sc2331/6.0/built-in.o

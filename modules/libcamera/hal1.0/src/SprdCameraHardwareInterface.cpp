@@ -2594,15 +2594,6 @@ status_t SprdCameraHardware::sendCommand(int32_t cmd, int32_t arg1, int32_t arg2
 			mHalOem->ops->camera_fd_enable(mCameraHandle, 1);
 		}
 		mHalOem->ops->camera_fd_start(mCameraHandle, 0);
-	} else if(AUTO_LOW_LIGHT_SET == cmd) {
-		/* lls is enabled with arg1= 1, disabled with arg1=0 */
-		mHalOem->ops->camera_lls_enable(mCameraHandle, arg1);
-	} else if(MULTI_FRAME_SHOT_START == cmd) {
-		/* lls shot mode is enabled with arg1= 1, disabled with arg1=0 */
-		mHalOem->ops->camera_set_lls_shot_mode(mCameraHandle, arg1);
-	} else if (HDR_PICTURE_MODE_CHANGE == cmd) {
-		/* vendor hdr mode is enabled with arg1 = 1, disabled with arg1=0 */
-		mHalOem->ops->camera_vendor_hdr_enable(mCameraHandle, arg1);
 /*fix me*/
 //	} else if(CAMERA_CMD_FLIP_ON == cmd){
 	} else if(SPRD_CMD_START_BURST_TAKE == cmd) {
@@ -7025,8 +7016,7 @@ void SprdCameraHardware::receivePreviewFrame(struct camera_frame_type *frame)
 
 	ssize_t offset = frame->buf_id;
 	camera_frame_metadata_t metadata;
-	metadata.light_condition = frame->lls_info;
-	LOGI("receivePreviewFrame lls_info = %d frame->type = %ld", metadata.light_condition, frame->type);
+	LOGI("receivePreviewFrame lls_info = %d frame->type = %ld", frame->type);
 	camera_face_t face_info[FACE_DETECT_NUM];
 	uint32_t k = 0;
 	int width, height, frame_size;

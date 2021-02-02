@@ -1,0 +1,2 @@
+0xed13f384	wlan_module_exit	/media/pc2robin/WD_Linux/lineage-15.1/working_dir/vendor/sprd/wcn/wifi/sc2331/6.0/sprdwl	EXPORT_SYMBOL_GPL
+0x9584ccd5	wlan_module_init	/media/pc2robin/WD_Linux/lineage-15.1/working_dir/vendor/sprd/wcn/wifi/sc2331/6.0/sprdwl	EXPORT_SYMBOL_GPL

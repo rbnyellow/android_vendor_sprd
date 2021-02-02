@@ -376,10 +376,10 @@ static int32_t GetAudio_mode_number_from_device(int outdev,int indev)
 
     }else if(outdev & AUDIO_DEVICE_OUT_EARPIECE){
         lmode = 2;  //handset
-    }else if((outdev & AUDIO_DEVICE_OUT_SPEAKER) || (outdev & AUDIO_DEVICE_OUT_FM_SPEAKER)){
+    }else if((outdev & AUDIO_DEVICE_OUT_SPEAKER) || (outdev & AUDIO_DEVICE_OUT_SPEAKER)){
         lmode = 3;  //handsfree
     }else if((outdev & AUDIO_DEVICE_OUT_WIRED_HEADSET) || (outdev & AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-            || (outdev & AUDIO_DEVICE_OUT_FM_HEADSET) || (indev & AUDIO_DEVICE_IN_WIRED_HEADSET)){
+            || (outdev & AUDIO_DEVICE_OUT_USB_HEADSET) || (indev & AUDIO_DEVICE_IN_WIRED_HEADSET)){
         lmode = 0;  //headset
     }else{
         ALOGW("%s device(0x%x) is not support, set default:handsfree \n",__func__,outdev);
@@ -1157,12 +1157,10 @@ int SetParas_Samplerate_Incall(int fd_pipe,struct tiny_audio_device *adev)
 
     pthread_mutex_lock(&adev->vbc_dlulock);
     if(adev->pcm_modem_dl){
-        ret = pcm_set_samplerate(adev->pcm_modem_dl, PCM_OUT, &pcm_config_vx, device_set_samplerate.samplerate);
         if(ret < 0){
             pthread_mutex_unlock(&adev->vbc_dlulock);
             return ret;
         }
-        ret = pcm_set_samplerate(adev->pcm_modem_ul, PCM_IN, &pcm_config_vrec_vx, device_set_samplerate.samplerate);
         if(ret < 0){
             pthread_mutex_unlock(&adev->vbc_dlulock);
             return ret;
